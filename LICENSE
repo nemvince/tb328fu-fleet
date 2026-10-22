@@ -1,0 +1,16 @@
+MIT License — for the scripts, docs, and module in this repository.
+
+Upstream components referenced here keep their own licenses:
+  spd_dump, custom_exec_no_verify_*.bin, gen_fdl1-dl.exe:
+    github.com/TomKing062/{spreadtrum_flash, CVE-2022-38694_unlock_bootloader}
+  V9 runner patches / confirmed bundle (cboot-v9-S200162.bin et al.):
+    MadD0g25/Lenovo-TB328FU-Bootloader-Unlock-Root
+  Magisk:
+    topjohnwu/Magisk
+  Lawnchair:
+    LawnchairLauncher/lawnchair
+
+This repository does not redistribute OEM firmware. The `firmware/` directory
+holds only extracts/derived files from the publicly mirrored official firmware and
+the upstream open-source tools listed above, for interoperability and research on
+hardware you own. Use at your own risk; BootROM exploit work can brick devices.

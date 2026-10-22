@@ -1,0 +1,12 @@
+# personal/local only
+*.log
+*.ipynb
+*_report.json
+built-report.json
+capture/
+dump/
+*.pac
+
+# local firmwares & device dumps never enter the repo
+firmware/stock/
+*.7z

@@ -1,0 +1,7 @@
+id=tb328_debloat
+name=TB328FU Debloat Keeper
+version=1.0
+versionCode=1
+author=omp
+description=Re-applies pm uninstall --user 0 for the de-bloat list after every boot. Restore a package with: cmd package install-existing <pkg>, then disable this module or edit packages.txt.
+minMagisk=25000
