@@ -19,6 +19,7 @@ com.google.android.apps.youtube.kids
 com.google.android.apps.youtube.music
 com.google.android.apps.youtube.music.setupwizard
 com.google.android.calendar
+com.google.android.deskclock
 com.google.android.feedback
 com.google.android.gm
 com.google.android.googlecamera.overlay
@@ -62,4 +63,3 @@ com.tblenovo.landscapevision.lenovolandscapevision
 com.tblenovo.lenovowhatsnew
 com.tblenovo.setup
 com.tblenovo.wallpaper
-com.google.android.deskclock
