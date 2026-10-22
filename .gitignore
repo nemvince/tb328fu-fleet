@@ -1,4 +1,6 @@
 # personal/local only
+__pycache__/
+*.pyc
 *.log
 *.ipynb
 *_report.json
