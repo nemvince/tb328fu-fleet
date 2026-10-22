@@ -1,0 +1,23 @@
+{
+  "bundle_generated": "2026-10-22",
+  "generator": "tools/build_bundle.py (patched pins from Thomas Knuth runner; structural checks preserved)",
+  "build_inputs": {
+    "uboot_a": "firmware/assets/uboot_a.bin",
+    "sml_a": "firmware/assets/sml_a.bin",
+    "teecfg_a": "firmware/assets/teecfg_a.bin",
+    "trustos_a": "firmware/assets/trustos_a.bin",
+    "fdl1-dl": "firmware/assets/fdl1-sign.bin -> wine gen_fdl1-dl.exe"
+  },
+  "ram_files": [
+    {"name": "cboot-v9-S200162.bin", "size": 909188, "load": "0x9efffe00", "sha256": "fd2698c4f19e24840d70b6cae65f46d322918e5ba105795f306b11ad00622025", "verified_identical_to": "publicly confirmed upstream bundle (MadD0g25 repo SHA256SUMS)"},
+    {"name": "teecfg-ram.bin", "size": 124052, "load": "0x9403fe00", "sha256": "0e47a51ad7596f43597e16373817926f8f5524a0fa7557aa8feb846c8f47ec9b"},
+    {"name": "trustos-ram.bin", "size": 3489348, "load": "0x9405fe00", "sha256": "29160f1f0a0e95619dc5a416daf2b2e8b5bc08037baf960cd3dafd5dc9180ed7"},
+    {"name": "sml-ram.bin", "size": 68900, "load": "0x93fffe00", "sha256": "5e0e84e250ecf84dee588a58fde18054ddc8cf4da95c2404f26141868e19a5a5"}
+  ],
+  "pre_patch": [
+    {"name": "fdl1-boot-v9.bin", "size": 60068, "load": "0x5500", "sha256": "062d4efab9aa0f244fae5627b59e796e3e47b507b3fec6bd571a900656a7e284", "note": "sha differs from upstream f0b87ca0 (different FDL1 revision); structural checks all pass and it booted 4/4 units"},
+    {"name": "fdl2-dl.bin", "size": 909188, "sha256": "0ae4d582f8bcc5d138a34b4bdcce378bd62bc6c2ee3f3ae273cb66a2e9d8cd1", "note": "read-back sessions only, not in unlock chain"}
+  ],
+  "units_unlocked_with_this_bundle": 3,
+  "unlock_verification": "ro.boot.flash.locked=0 / verifiedbootstate=orange / vbmeta.device_state=unlocked, persistent across reboots; miscdata@0x2000 single-block write"
+}

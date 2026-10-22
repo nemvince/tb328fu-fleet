@@ -1,0 +1,33 @@
+name: verify
+on: [push, pull_request]
+jobs:
+  bundle-and-tools:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Python syntax
+        run: python3 -m py_compile tools/*.py
+      - name: Bundle hash audit vs manifest
+        run: |
+          python3 - <<'EOF'
+          import json, hashlib, sys
+          from pathlib import Path
+          m = json.loads(Path('bundle/VERIFICATION.json').read_text())
+          bad = 0
+          for f in m['ram_files'] + m['pre_patch']:
+              p = Path('bundle')/f['name']
+              if not p.is_file():
+                  print('MISSING', f['name']); bad += 1; continue
+              h = hashlib.sha256(p.read_bytes()).hexdigest()
+              if h != f['sha256'] or len(p.read_bytes()) != f['size']:
+                  print('MISMATCH', f['name'], h); bad += 1
+          sys.exit(1 if bad else 0)
+          EOF
+      - name: Package list is well-formed
+        run: |
+          awk 'NF' module/packages.txt | sort -c && echo "package list: $(awk 'NF' module/packages.txt | wc -l) packages"
+          ! grep -qE '^(com.tblenovo.launcher|com.lenovo.launcher.provider)$' module/packages.txt && echo "recents hosts preserved OK"
+      - name: service.sh policy lines present
+        run: |
+          grep -q 'allow magisk cpu_device' module/service.sh && echo cpu_device policy OK
+          grep -q 'allow magisk sysfs ' module/service.sh && echo sysfs policy OK

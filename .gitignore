@@ -7,6 +7,8 @@ capture/
 dump/
 *.pac
 
+!bundle/VERIFICATION.json
+
 # local firmwares & device dumps never enter the repo
 firmware/stock/
 *.7z
