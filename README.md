@@ -1,4 +1,8 @@
-# TB328FU Fleet — Bootloader Unlock, Root & Debloat Kit
+# tb328fu-fleet
+
+[![standard-readme compliant](https://img.shields.io/badge/readme%20style-standard-brightgreen.svg?style=flat-square)](https://github.com/RichardLitt/standard-readme)
+
+Bootloader unlock, Magisk root and debloat kit for Lenovo Tab M10 3rd Gen (TB328FU) tablets.
 
 Scripts, firmware assets, and operational notes for converting Lenovo Tab M10 3rd Gen
 (TB328FU/EEA, Unisoc T610 / UMS512, Android 12 build `TB328FU_S200162_250825_ROW`)
@@ -7,7 +11,29 @@ debloat + FOSS replacements → screen-aware performance floors.**
 
 The full flow is **verified on 4 identical units** (Oct 2026) and scripted end-to-end.
 
-## TL;DR — process a new tablet
+## Table of Contents
+
+- [Install](#install)
+- [Usage](#usage)
+- [Final state achieved (per unit)](#final-state-achieved-per-unit)
+- [What's here](#whats-here)
+- [How the unlock works (short version)](#how-the-unlock-works-short-version)
+- [Safety](#safety)
+- [Maintainers](#maintainers)
+- [Contributing](#contributing)
+- [License](#license)
+
+## Install
+
+- Linux host with `adb`/`fastboot` (platform-tools), `sudo -n`, libusb; `wine` only if
+  you need to regenerate fdl1 (we ship the fdl1 output already).
+- Official firmware `ums512_1h10_Natv_Tablet-user-gms_SHARKL5PRO_SUPER_TABLET.pac`
+  (S200162) — used for fdl/TOS assets, not flashed.
+- Magisk APK v30.7 (kept at `~/Downloads/tb328-root/Magisk-v30.7.apk`, patch output
+  `~/Downloads/tb328-root/out/magisk_patched.img`, sha `5c99161e…`); FOSS APKs live
+  under `/tmp` — see `docs/foss-apps.md` for the re-download list.
+
+## Usage
 
 ```bash
 # 0. tablet booted into Android, USB debugging on, battery >50%
@@ -86,16 +112,6 @@ patched cboot's `set_lock_status(1)` hook writes the unlock **record into
 `miscdata`@0x2000** — persistent, slot-independent — and we never flash anything or
 patch trustos. Full details and the verified command: `docs/unlock.md`.
 
-## Requirements
-
-- Linux host with `adb`/`fastboot` (platform-tools), `sudo -n`, libusb; `wine` only if
-  you need to regenerate fdl1 (we ship the fdl1 output already).
-- Official firmware `ums512_1h10_Natv_Tablet-user-gms_SHARKL5PRO_SUPER_TABLET.pac`
-  (S200162) — used for fdl/TOS assets, not flashed.
-- Magisk APK v30.7 (kept at `~/Downloads/tb328-root/Magisk-v30.7.apk`, patch output
-  `~/Downloads/tb328-root/out/magisk_patched.img`, sha `5c99161e…`); FOSS APKs live
-  under `/tmp` — see `docs/foss-apps.md` for the re-download list.
-
 ## Safety
 
 The unlock renders existing userdata inaccessible on some units (encryption metadata
@@ -108,3 +124,20 @@ if it does, that's the route).
 Attribution & upstream research: TomKing062 CVE-2022-38694 unlock_bootloader
 (`soc/ums512/custom_exec_no_verify_3ee8.bin`), MadD0g25/Lenovo-TB328FU-Bootloader-Unlock-Root
 (UNLOCK_EN.md, root guide), TomKing062/spreadtrum_flash (spd_dump).
+
+## Maintainers
+
+- Tamás Vince ([@nemvince](https://github.com/nemvince))
+
+## Contributing
+
+Questions and bug reports go to the [issue
+tracker](https://github.com/nemvince/tb328fu-fleet/issues). Pull requests are
+welcome — a new build or a different regional model is the most useful
+contribution, and `docs/troubleshooting.md` is where those findings belong.
+
+## License
+
+MIT for the scripts, docs and Magisk module in this repository. Upstream
+components keep their own licenses: `spd_dump`, `custom_exec_no_verify_*.bin`
+and `gen_fdl1-dl.exe`. See [LICENSE](LICENSE). © Tamás Vince.
